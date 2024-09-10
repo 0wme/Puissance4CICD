@@ -1,33 +1,21 @@
-name: Lint JavaScript Code
-
-# Déclencher l'action à chaque push ou pull request
-on:
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
-
 jobs:
   eslint:
     runs-on: ubuntu-latest
 
     steps:
-      # Vérifier le dépôt
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Configurer Node.js pour l'environnement
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '16'
 
-      # Installer les dépendances
       - name: Install dependencies
         run: npm install
 
-      # Lancer ESLint
+      - name: Give execute permissions to node_modules binaries
+        run: chmod +x ./node_modules/.bin/eslint
+
       - name: Run ESLint
         run: npx eslint .
