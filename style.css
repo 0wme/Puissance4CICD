@@ -42,8 +42,16 @@ h1 {
     background-color: red;
 }
 
+.red:hover {
+    background-color: #c40000;
+}
+
 .yellow {
     background-color: yellow;
+}
+
+.yellow:hover {
+    background-color: #c7c700;
 }
 
 #message {
