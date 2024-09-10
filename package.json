@@ -1,10 +1,26 @@
 {
-  "name": "Puissance4CICD",
+  "name": "puissance4cicd",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "private": true
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/0wme/Puissance4CICD.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/0wme/Puissance4CICD/issues"
+  },
+  "homepage": "https://github.com/0wme/Puissance4CICD#readme",
+  "description": "",
+  "devDependencies": {
+    "@eslint/js": "^9.10.0",
+    "eslint": "^8.57.0",
+    "globals": "^15.9.0"
+  }
 }
