@@ -47,6 +47,11 @@ function handleCellClick(col) {
                 gameOver = true;
                 return;
             }
+            if (checkDraw()) {
+                message.textContent = "Match nul !";
+                gameOver = true;
+                return;
+            }
             currentPlayer = currentPlayer === "red" ? "yellow" : "red";
             return;
         }
@@ -73,10 +78,22 @@ function checkWin() {
         return false;
     }
 
-    return checkDirection(0, 1) || // Horizontal
-        checkDirection(1, 0) || // Vertical
-        checkDirection(1, 1) || // Diagonale droite-bas
-        checkDirection(1, -1);  // Diagonale droite-haut
+    return checkDirection(0, 1) ||
+        checkDirection(1, 0) ||
+        checkDirection(1, 1) ||
+        checkDirection(1, -1);
+}
+
+// Vérifier le match nul
+function checkDraw() {
+    for (let row = 0; row < 6; row++) {
+        for (let col = 0; col < 7; col++) {
+            if (board[row][col] === null) {
+                return false; // Il reste des cellules vides, donc le match n'est pas nul
+            }
+        }
+    }
+    return true; // Toutes les cellules sont remplies, donc c'est un match nul
 }
 
 // Recommencer le jeu
