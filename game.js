@@ -1,10 +1,23 @@
-const gameBoard = document.getElementById("gameBoard");
-const message = document.getElementById("message");
-const restartButton = document.getElementById("restartButton");
-
+let gameBoard, message, restartButton;
 let board = [];
 let currentPlayer = "red";
 let gameOver = false;
+
+// Initialiser les éléments du DOM
+function initializeDomElements() {
+    gameBoard = document.getElementById("gameBoard");
+    message = document.getElementById("message");
+    restartButton = document.getElementById("restartButton");
+
+    // Ajouter l'écouteur d'événements seulement après avoir trouvé le bouton
+    restartButton.addEventListener("click", () => {
+        createBoard();
+        drawBoard();
+        message.textContent = "";
+        currentPlayer = "red";
+        gameOver = false;
+    });
+}
 
 // Initialiser le tableau
 function createBoard() {
@@ -16,6 +29,7 @@ function createBoard() {
         }
         board.push(rowArray);
     }
+    return board;  // Retourner le plateau pour les tests
 }
 
 // Dessiner le plateau
@@ -78,10 +92,10 @@ function checkWin() {
         return false;
     }
 
-    return checkDirection(0, 1) ||
-        checkDirection(1, 0) ||
-        checkDirection(1, 1) ||
-        checkDirection(1, -1);
+    return checkDirection(0, 1) || // Lignes
+        checkDirection(1, 0) ||    // Colonnes
+        checkDirection(1, 1) ||    // Diagonale descendante
+        checkDirection(1, -1);     // Diagonale montante
 }
 
 // Vérifier le match nul
@@ -96,15 +110,12 @@ function checkDraw() {
     return true; // Toutes les cellules sont remplies, donc c'est un match nul
 }
 
-// Recommencer le jeu
-restartButton.addEventListener("click", () => {
+// Initialiser le jeu
+function initGame() {
+    initializeDomElements();
     createBoard();
     drawBoard();
-    message.textContent = "";
-    currentPlayer = "red";
-    gameOver = false;
-});
+}
 
-// Initialiser le jeu
-createBoard();
-drawBoard();
+// Exporte les fonctions pour les tests
+export { createBoard, drawBoard, handleCellClick, checkWin, checkDraw, initGame };
